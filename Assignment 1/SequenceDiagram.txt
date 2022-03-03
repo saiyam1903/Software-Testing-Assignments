@@ -1,0 +1,27 @@
+@startuml SequenceDiagram
+title Scene Depiction in Videos for Blind
+actor User as A
+participant VoiceAgent as B
+participant VideoPlayer as C
+participant CaptionGenerator as D
+autonumber
+->A: Initializtion
+A->B: Input_Video
+B->C: Validate Video
+
+alt Valid video
+    C->B: Valid Input
+    B->A: Video Loaded Successfully
+else else
+    C->B: Invalid Input
+    B->A: Error
+end
+
+C->C: Display_video
+A->B: Voice Command
+B->C: Voice to Function
+C->C: Video Functions
+C->D: Generate Caption
+D->B: Caption
+B->A: Caption to Audio
+@enduml

@@ -1,0 +1,42 @@
+@startuml UseCaseDiagram
+
+skinparam actorStyle awesome
+actor User as U
+actor "Third party Video Source" as V
+left to right direction
+skinparam packageStyle rectangle
+
+rectangle "Video Captioning Web App" {
+(Upload Video) as uploadVideo
+(Network Error) as networkError
+(Enter URL) as enterUrl
+(URL not found Error) as urlError
+(Select user type) as selectUT
+(Change user type) as changeUT
+(Select interaction type) as selectIT
+(Change interaction type) as changeIT
+(Adjust Video Player Settings) as adjustVPS
+(Command Not Found) as cnf
+(Ask for help) as help
+(Play instruction file) as insFile
+}
+
+uploadVideo <.. networkError : extend
+enterUrl  <.. urlError : extend
+selectUT <.. changeUT  : extend
+selectIT <.. changeIT : extend
+adjustVPS <.. cnf : extend
+help ..> insFile : include
+
+U -- uploadVideo
+U -- enterUrl
+U -- selectUT
+U -- selectIT
+U -- adjustVPS
+U -- help
+
+enterUrl --> V 
+
+
+
+@enduml
